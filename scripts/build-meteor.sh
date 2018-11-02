@@ -5,6 +5,10 @@
 #
 set -e
 
+if [ -f $APP_SOURCE_DIR/launchpad.conf ]; then
+  source <(grep TOOL_NODE_FLAGS $APP_SOURCE_DIR/launchpad.conf)
+fi
+
 # set up npm auth token if one is provided
 if [[ "$NPM_TOKEN" ]]; then
   echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
@@ -29,7 +33,7 @@ meteor build --directory $APP_BUNDLE_DIR --server-only
 # run npm install in bundle
 printf "\n[-] Running npm install in the server bundle...\n\n"
 cd $APP_BUNDLE_DIR/bundle/programs/server/
-meteor npm install --production
+meteor npm install --production --verbose
 
 # put the entrypoint script in WORKDIR
 mv $BUILD_SCRIPTS_DIR/entrypoint.sh $APP_BUNDLE_DIR/bundle/entrypoint.sh

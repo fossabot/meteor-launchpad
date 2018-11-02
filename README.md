@@ -75,8 +75,8 @@ To use any of them, create a `launchpad.conf` in the root of your app and add an
 # (default: undefined)
 APT_GET_INSTALL="curl git wget"
 
-# Install a custom Node version (default: latest 4.x)
-NODE_VERSION=4.8.3
+# Install a custom Node version (default: latest 8.x)
+NODE_VERSION=8.9.0
 
 # Installs the latest version of each (default: all false)
 INSTALL_MONGO=true
@@ -92,7 +92,7 @@ If you prefer not to have a config file in your project, your other option is to
 docker build \
   --build-arg APT_GET_INSTALL="curl git wget" \
   --build-arg INSTALL_MONGO=true \
-  --build-arg NODE_VERSION=4.7.2 \
+  --build-arg NODE_VERSION=8.9.0 \
   -t myorg/myapp:latest .
 ```
 
@@ -113,6 +113,21 @@ FROM jshimko/meteor-launchpad:devbuild
 ```
 
 This isn't recommended for your final production build because it creates a much larger image, but it's a bit of a time saver when you're building often in development.  The first build you run will download/install Meteor and then every subsequent build will be able to skip that step and just build the app.
+
+## Meteor.settings
+
+If you want to include custom settings (as you would via a [settings.json file](https://docs.meteor.com/api/core.html#Meteor-settings)), you need to set the METEOR_SETTINGS environment variable:
+
+```sh
+docker run -d \
+  -e ROOT_URL=http://example.com \
+  -e MONGO_URL=mongodb://url \
+  -e MONGO_OPLOG_URL=mongodb://oplog_url \
+  -e MAIL_URL=smtp://mail_url.com \
+  -e METEOR_SETTINGS="$(cat settings.json)" \
+  -p 80:3000 \
+  yourname/app
+```
 
 ## Docker Compose
 
