@@ -9,11 +9,17 @@ fi
 if [ "$INSTALL_MONGO" = true ]; then
   printf "\n[-] Installing MongoDB ${MONGO_VERSION}...\n\n"
 
-	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0C49F3730359A14518585931BC711F9BA15703C6
+    for server in ha.pool.sks-keyservers.net \
+              hkp://p80.pool.sks-keyservers.net:80 \
+              keyserver.ubuntu.com \
+              hkp://keyserver.ubuntu.com:80 \
+              pgp.mit.edu; do
+        apt-key adv --keyserver "$server" --recv-keys 0C49F3730359A14518585931BC711F9BA15703C6 && break || echo "Trying new server..."
+    done
 
   echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list
 
-	apt-get update
+  apt-get update
 
   apt-get install -y \
     ${MONGO_PACKAGE}=$MONGO_VERSION \
