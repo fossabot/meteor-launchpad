@@ -1,5 +1,4 @@
 FROM debian:stretch
-MAINTAINER OpenMove team
 
 RUN groupadd -r node && useradd -m -g node node
 
@@ -33,9 +32,6 @@ ONBUILD ENV NODE_VERSION ${NODE_VERSION:-8.9.0}
 ONBUILD ARG NPM_TOKEN
 ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 
-ONBUILD ARG INSTALL_MONGO
-ONBUILD ENV INSTALL_MONGO $INSTALL_MONGO
-
 ONBUILD ARG INSTALL_PHANTOMJS
 ONBUILD ENV INSTALL_PHANTOMJS $INSTALL_PHANTOMJS
 
@@ -54,7 +50,6 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/install-node.sh && \
   $BUILD_SCRIPTS_DIR/install-phantom.sh && \
-  $BUILD_SCRIPTS_DIR/install-mongo.sh && \
   $BUILD_SCRIPTS_DIR/install-meteor.sh && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh && \
   $BUILD_SCRIPTS_DIR/post-build-cleanup.sh
