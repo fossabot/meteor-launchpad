@@ -1,14 +1,9 @@
-FROM debian:stretch
+FROM debian:buster
 
 RUN groupadd -r node && useradd -m -g node node
 
 # Gosu
 ENV GOSU_VERSION 1.10
-
-# MongoDB
-ENV MONGO_VERSION 3.4.10
-ENV MONGO_MAJOR 3.4
-ENV MONGO_PACKAGE mongodb-org
 
 # PhantomJS
 ENV PHANTOM_VERSION 2.1.1
