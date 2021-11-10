@@ -12,7 +12,7 @@ NODE_DIST=node-v${NODE_VERSION}-linux-x64
 
 cd /tmp
 curl -O -L http://nodejs.org/dist/v${NODE_VERSION}/${NODE_DIST}.tar.gz
-tar xzf ${NODE_DIST}.tar.gz
+tar xzf ${NODE_DIST}.tar.gz >/dev/null 2>&1
 rm ${NODE_DIST}.tar.gz
 rm -rf /opt/nodejs
 mv ${NODE_DIST} /opt/nodejs

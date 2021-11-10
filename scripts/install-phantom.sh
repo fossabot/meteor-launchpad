@@ -16,8 +16,8 @@ if [ "$INSTALL_PHANTOMJS" = true ]; then
   apt-get install -y wget chrpath libssl-dev libxft-dev
 
   cd /tmp
-  wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOM_VERSION/$PHANTOM_JS.tar.bz2
-  tar xjf $PHANTOM_JS.tar.bz2
+  wget -q https://github.com/Medium/phantomjs/releases/download/v$PHANTOM_VERSION/$PHANTOM_JS.tar.bz2
+  tar xjf $PHANTOM_JS.tar.bz2 >/dev/null 2>&1
   mv $PHANTOM_JS /usr/local/share
   ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs
   ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs
