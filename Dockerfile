@@ -51,6 +51,13 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh && \
   $BUILD_SCRIPTS_DIR/post-build-cleanup.sh
 
+
+# PhantomJS requires  an OpenSSL config even if it's an empty one,
+# else it'll complain about "libssl_conf.so: cannot open shared object file"
+# which seems to be a recent bug.
+RUN touch /opt/openssl.cnf
+ENV OPENSSL_CONF /opt/openssl.cnf
+
 # Default values for Meteor environment variables
 ENV ROOT_URL http://localhost
 ENV MONGO_URL mongodb://127.0.0.1:27017/meteor
