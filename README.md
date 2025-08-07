@@ -1,4 +1,6 @@
 # Meteor Launchpad - Base Docker Image for Meteor Apps
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcleverpush%2Fmeteor-launchpad.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcleverpush%2Fmeteor-launchpad?ref=badge_shield)
+
 
 Based on https://github.com/jshimko/meteor-launchpad
 
@@ -89,3 +91,7 @@ You can provide your [NPM auth token](https://blog.npmjs.org/post/118393368555/d
 ```sh
 docker build --build-arg NPM_TOKEN="<your token>" -t myorg/myapp:latest .
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcleverpush%2Fmeteor-launchpad.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcleverpush%2Fmeteor-launchpad?ref=badge_large)
